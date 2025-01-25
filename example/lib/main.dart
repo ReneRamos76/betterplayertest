@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
