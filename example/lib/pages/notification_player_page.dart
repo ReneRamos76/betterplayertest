@@ -10,13 +10,17 @@ class NotificationPlayerPage extends StatefulWidget {
 class _NotificationPlayerPageState extends State<NotificationPlayerPage> {
   late BetterPlayerController _betterPlayerController;
 
+  final _betterKey = GlobalKey();
+
   @override
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.contain,
-      handleLifecycle: true,
+      handleLifecycle: false,
+      autoPlay: true,
+      autoDispose: true,
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _setupDataSource();
@@ -28,14 +32,16 @@ class _NotificationPlayerPageState extends State<NotificationPlayerPage> {
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       Constants.elephantDreamVideoUrl,
+      
       notificationConfiguration: BetterPlayerNotificationConfiguration(
-        showNotification: true,
+        showNotification: false,
         title: "Elephant dream",
         author: "Some author",
         imageUrl: Constants.catImageUrl,
       ),
     );
     _betterPlayerController.setupDataSource(dataSource);
+    _betterPlayerController.setBetterPlayerGlobalKey(_betterKey);
   }
 
   @override
@@ -56,7 +62,10 @@ class _NotificationPlayerPageState extends State<NotificationPlayerPage> {
           ),
           AspectRatio(
             aspectRatio: 16 / 9,
-            child: BetterPlayer(controller: _betterPlayerController),
+            child: BetterPlayer(
+              controller: _betterPlayerController,
+              key: _betterKey,
+            ),
           ),
         ],
       ),

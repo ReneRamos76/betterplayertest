@@ -129,7 +129,7 @@ class _WelcomePageState extends State<WelcomePage> {
       _buildExampleElementWidget("Overridden aspect ratio", () {
         _navigateToPage(OverriddenAspectRatioPage());
       }),
-      _buildExampleElementWidget("Notifications player", () {
+      _buildExampleElementWidget( color: true  , "Notifications player", () {
         _navigateToPage(NotificationPlayerPage());
       }),
       _buildExampleElementWidget("Reusable video list", () {
@@ -165,22 +165,25 @@ class _WelcomePageState extends State<WelcomePage> {
     ];
   }
 
-  Widget _buildExampleElementWidget(String name, Function onClicked) {
+  Widget _buildExampleElementWidget(String name, Function onClicked, { bool color = false }) {
     return Material(
       child: InkWell(
         onTap: onClicked as void Function()?,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                name,
-                style: TextStyle(fontSize: 16),
+        child: Container(
+          color: color ?Colors.red: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  name,
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-            ),
-            Divider(),
-          ],
+              Divider(),
+            ],
+          ),
         ),
       ),
     );
